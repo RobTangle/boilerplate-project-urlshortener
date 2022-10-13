@@ -19,7 +19,7 @@ function isValidURL(argumento) {
 
 function validURL(str) {
   var pattern = new RegExp(
-    "^(https?:\\/\\/)?" + // protocol
+    "^(https?:\\/\\/)" + // protocol
       "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
       "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
       "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
@@ -47,6 +47,7 @@ router.post("/shorturl", (req, res) => {
     const urlFromReq = req.body.url;
     console.log(urlFromReq);
     if (!validURL(urlFromReq)) {
+      console.log(`url inválida`);
       return res.status(400).send({ error: "invalid url" });
     }
 
